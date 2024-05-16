@@ -1,0 +1,226 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GAMIFICATION</title>
+    <link rel="stylesheet" href="{% static 'css/Gamified.css' %}">
+</head>
+<!--  body to page -->
+<body>
+    <!--Navigation start -->
+    <header>
+        <a href="{% url 'index' %}">
+            <svg id="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path
+                d="M18.5 12h-9.793l3.147-3.146a.5.5 0 0 0-.708-.708l-4.5 4.5a.5.5 0 0 0 0 .708l4.5 4.5a.5.5 0 0 0 .708-.708L8.707 13H18.5a.5.5 0 0 0 0-1z"
+                fill="#000"
+              />
+            </svg>
+          </a>
+          <a href="{% url 'MOI_Assistant' %}">
+            <svg
+              id="arrow2"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              transform="rotate(180)"
+            >
+              <path
+                d="M18.5 12h-9.793l3.147-3.146a.5.5 0 0 0-.708-.708l-4.5 4.5a.5.5 0 0 0 0 .708l4.5 4.5a.5.5 0 0 0 .708-.708L8.707 13H18.5a.5.5 0 0 0 0-1z"
+                fill="#000"
+              />
+            </svg>
+          </a>
+    </header>
+    <!--Navigation End -->
+
+    <!--Slider to MOI Services start detailing lists of services offered ny MOI-->
+    <div class="carousel">
+        <div class="list">
+            <div class="item">
+                <img src="{% static 'images/vehicle registration.png' %}">
+                <div class="introduce">
+                    <div class="title">Issuance of a Vehicle Registration</div>
+                    <br>
+                    <div class="topic">Service Description</div>
+                    <div class="des">
+                        A Service through which the vehicle is licensed for driving and use on the roads
+                    </div>
+                    <button class="seeMore">SEE MORE &#8599</button>
+                </div>
+                <div class="detail">
+                    <div>
+                        <div>
+                            <h4>Service Requirements</h4>
+                            <p>Emirates ID
+                            Vehicle papers
+                            Insurance
+                            Test
+                            </p>
+                        </div>
+                        <div>
+                            <h4>Service Fees Details</h4>
+                            <p> • 400 AED light vehicles, private
+                            </p>
+                            <p>Local Fees:      Dubai: Knowledge 10 AED
+                                                Innovation 10 AED
+                            </p>
+                        </div>
+                        <div>
+                            <h4>Terms & Conditions</h4>
+                            <p>Original Emirates ID card, No-objection letter for registration
+                            </p>
+                        </div>
+                        <div>
+                            <h4>Working hours to provide service</h4>
+                            <p>Website:     24/7</p>
+                            <p>Smart App:   24/7</p>
+                        </div>
+                    </div>
+                    <div class="checkout">
+                        <button id = "back1">Go Back</button>
+                        <button href=""#>Continue</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item">
+                <img src="{% static 'images/traffic.png' %}">
+                <div class="introduce">
+                    <div class="title">Traffic File Opening</div>
+                    <br>
+                    <div class="topic">Service Description</div>
+                    <div class="des">
+                        Through this service, a file can be opened to attend theoretical and practical training course in order to obtain a driving license
+                    </div>
+                    <button class="seeMore">SEE MORE &#8599</button>
+                </div>
+                <div class="detail">
+                    <div>
+                        <div>
+                            <h4>Service Requirements</h4>
+                            <p>ID</p>
+                        </div>
+                        <div>
+                            <h4>Service Fees Details</h4>
+                            <p>Federal fees200 AED</p>
+                            <p>Local feesDubai: 10 AED Knowledge - 10 AED Innovation </p>
+                        </div>
+                        <div>
+                            <h4>Terms & Conditions</h4>
+                            <p> • Passing the eye test
+                                • 18 years, 20 years, 21 years
+                            </p>
+                        </div>
+                        <div>
+                            <h4>Working hours to provide service</h4>
+                            <p>Website:     24/7</p>
+                            <p>Smart App:   24/7</p>
+                        </div>
+                    </div>
+                    <div class="checkout">
+                        <button id ="back2">Go Back</button>
+                        <button href = "#">Continue</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item">
+                <img src="{% static 'images/fines.png' %}">
+                <div class="introduce">
+                    <div class="title">Payment of Traffic Fines</div>
+                    <br>
+                    <div class="topic">Service Description</div>
+                    <div class="des">
+                        It is one of the MOI services approved by the cabinet resolution No.30 of 2017 concerning the payment of traffic 
+                        fines through available service delivery channels: 
+                        (1- Customer Happiness Centers at Traffic & Licensing Department; 2- Website; 3- Smart Application; 4- Self-service
+                         machines) to process applications related to Licensing and Vehicles
+                    </div>
+                    <button class="seeMore">SEE MORE &#8599</button>
+                </div>
+                <div class="detail">
+                    <div>
+                        <div>
+                            <h4>Service Requirements</h4>
+                            <p>EID- Vehicle Registration Card - Driving License</p>
+                        </div>
+                        <div>
+                            <h4>Service Fees Details</h4>
+                            <p>Federal Fees:       Not Available</p>
+                            <p>Local Fees:      Not Available</p>
+                        </div>
+                        <div>
+                            <h4>Terms & Conditions</h4>
+                            <p>Terms & Conditions:  Not Available</p>
+                        </div>
+                        <div>
+                            <h4>Working hours to provide service</h4>
+                            <p>Website:     24/7</p>
+                            <p>Smart App:   24/7</p>
+                        </div>
+                    </div>
+                    <div class="checkout">
+                        <button id= "back3">Go Back</button>
+                        <button href= "#">Continue</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item">
+                <img src="{% static 'images/driving_license.png' %}">
+                <div class="introduce">
+                    <div class="title">Issue a vehicle driving license</div>
+                    <br/>
+                    <div class="topic">Service Description</div>
+                    <div class="des">
+                        A service whereby a driving license is issued allowing the driver to drive 
+                        on the roads post confirming his\her eligibility and ability to drive and passing all required tests
+                    </div>
+                    <button class="seeMore">SEE MORE &#8599</button>
+                </div>
+                <div class="detail">
+                    <div>
+                        <div>
+                            <h4>Service Requirements</h4>
+                            <p>Emirates ID</p>
+                        </div>
+                        <div>
+                            <h4>Service Fees Details</h4>
+                            <p>Federal fees:    100 dirhams under 21 years old </p> 
+                        </div>
+                        <div>
+                            <h4>Terms & Conditions</h4>
+                            <p>Pass both theoretical and practical tests</p>
+                        </div>
+                        <div>
+                            <h4>Working hours to provide service</h4>
+                            <p>Website:     24/7</p>
+                            <p>Smart App:   24/7</p>
+                        </div>
+                    </div>
+                    <div class="checkout">
+                        <button id= "back4">Go Back</button>
+                        <button href="#">Continue</button>
+                    </div>
+                </div>
+            </div>            
+        </div>
+
+        <!--Arrows for directing slides-->
+        <div class="arrows">
+            <button id="prev"><<</button>
+            <button id="next">>></button>
+        </div>
+    </div>
+    <!--Slider to MOI Services start -->
+
+    <!--Custom javaScript files-->
+    <script src="{% static 'js/app.js' %}"></script>
+    <script>(function (d) { var s = d.createElement("script"); s.setAttribute("data-account", "gchJ1Qb2TE"); s.setAttribute("src", "https://cdn.userway.org/widget.js"); (d.body || d.head).appendChild(s); })(document)</script>
+	<noscript>Please ensure Javascript is enabled for purposes of <a href="https://userway.org">website
+			accessibility</a></noscript>
+</body>
+<!--End to body-->
+</html>

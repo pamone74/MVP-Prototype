@@ -1,0 +1,350 @@
+{% load static %}
+<!--Preloaading of css and javaScript for quick loading and proper functionality-->
+<link
+  href="{% static 'css/bootstrap.min.css' %}"
+  rel="stylesheet"
+  id="bootstrap-css"
+/>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<!--End to preloading-->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MOI Assistant</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/all.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/Gamified.css' %}" />
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/style.css' %}"
+    />
+  </head>
+
+  <!--custom css start-->
+  <style>
+    #resize {
+      width: 95%;
+      margin-left: 2.5%;
+      margin-right: 2.5%;
+    }
+
+    #full {
+      width: 50%;
+      margin-top: 0;
+      margin-bottom: 0;
+      margin-right: 25%;
+      margin-left: 25%;
+      background-color: var(--primary-color);
+      color: #fff;
+      transition: background-color 0.5s ease;
+    }
+
+    :root {
+      --primary-color: #ffffff;
+      --secondary-color: #fffff5;
+    }
+
+    placeholder {
+      color: black;
+      background-color: #fffff5;
+    }
+
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      color: black;
+    }
+
+    #arrow {
+      position: fixed;
+      top: 43%;
+      left: 200px;
+      width: 50px;
+      height: 50px;
+      fill: #000;
+      /* Change the color as needed */
+      cursor: pointer;
+      z-index: 9999;
+      /* Ensure it's above other elements */
+    }
+
+    #arrow2 {
+      position: fixed;
+      top: 43%;
+      right: 200px;
+      width: 50px;
+      height: 50px;
+      fill: #000;
+      /* Change the color as needed */
+      cursor: pointer;
+      z-index: 9999;
+      /* Ensure it's above other elements */
+    }
+    #videoElement {
+      margin-top: 20%;
+      margin-right: 2%;
+      margin-left:  50%;
+      margin-bottom: 10px;
+      border-radius: 30px;
+    }
+  </style>
+  <!--custom css end-->
+
+  <!--start the page content-->
+  <body>
+    <a href="{% url 'index' %}">
+      <svg id="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path
+          d="M18.5 12h-9.793l3.147-3.146a.5.5 0 0 0-.708-.708l-4.5 4.5a.5.5 0 0 0 0 .708l4.5 4.5a.5.5 0 0 0 .708-.708L8.707 13H18.5a.5.5 0 0 0 0-1z"
+          fill="#000"
+        />
+      </svg>
+    </a>
+    <div id="full" class="container-fluid">
+      <div>
+        <div>
+          <div class="card">
+            <div class="card-header" style="background-color: white">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h5 class="display-5">Welcome</h5>
+                  <h6>Ministry of Interior Assistant</h6>
+                </div>
+                <div class="col-sm-4 tex-end">
+                  <img
+                    src="{% static 'img/MOI.jpg' %}"
+                    class="rounded-circle"
+                    width="100px"
+                    height="70px"
+                  />
+                </div>
+              </div>
+            </div>
+            <div id="messageFormeight" class="card-body msg_card_body"></div>
+            
+            <!-- sign language streaming -->
+            <img id="videoElement" >
+
+            <div id="resize">
+              <form id="messageArea" class="input-group">
+                <input
+                  type="text"
+                  id="text"
+                  name="msg"
+                  placeholder="Type your message..."
+                  autocomplete="off"
+                  class="form-control type_msg"
+                  required
+                />
+                <div class="input-group-append shape">
+                  <button
+                    type="submit"
+                    id="send"
+                    class="input-group-text send_btn"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M24 0l-6 22-8.129-7.239 7.802-8.234-10.458 7.227-7.215-1.754 24-12zm-15 16.668v7.332l3.258-4.431-3.258-2.901z"
+                      />
+                    </svg>
+                  </button>
+                </div>
+                <div class="input-group-append shape words">
+                  <button
+                    type="button"
+                    id="recordButton"
+                    class="input-group-text send_btn2"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M12 2c1.103 0 2 .897 2 2v7c0 1.103-.897 2-2 2s-2-.897-2-2v-7c0-1.103.897-2 2-2zm0-2c-2.209 0-4 1.791-4 4v7c0 2.209 1.791 4 4 4s4-1.791 4-4v-7c0-2.209-1.791-4-4-4zm8 9v2c0 4.418-3.582 8-8 8s-8-3.582-8-8v-2h2v2c0 3.309 2.691 6 6 6s6-2.691 6-6v-2h2zm-7 13v-2h-2v2h-4v2h10v-2h-4z"
+                      />
+                    </svg>
+                  </button>
+                </div>
+
+                <div class="input-group-append shape">
+                  <button
+                    id=""
+                    class="input-group-text send_btn2"
+                  >
+                    <?xml version="1.0" encoding="iso-8859-1"?>
+                    <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+                    <svg
+                      fill="#000000"
+                      version="1.1"
+                      id="Capa_1"
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      width="24px"
+                      height="24px"
+                      viewBox="0 0 152.788 152.789"
+                      xml:space="preserve"
+                    >
+                      <g>
+                        <g>
+                          <path
+                            d="M127.287,75.895v-6.32c0-7.209-5.699-13.083-12.708-13.083c-2.43,0-4.677,0.734-6.619,1.952V32.312
+                        c0-7.209-5.62-13.07-12.55-13.07c-2.308,0-4.457,0.691-6.32,1.839v-7.986C89.09,5.873,83.391,0,76.382,0
+                        c-6.497,0-11.81,5.063-12.553,11.56c-1.915-1.184-4.141-1.927-6.534-1.927c-7.009,0-12.708,5.867-12.708,13.095v7.45
+                        c-1.894-1.16-4.077-1.863-6.433-1.863c-7.003,0-12.702,5.867-12.702,13.082V65.97v33.88v7.745
+                        c0,26.609,20.944,45.193,50.942,45.193c29.995,0,50.941-18.584,50.941-45.193v-31.42L127.287,75.895z M76.4,146.554
+                        c-26.327,0-44.707-16.027-44.707-38.959V99.85V65.97V41.397c0-3.766,2.898-6.847,6.467-6.847c3.504,0,6.333,2.974,6.433,6.646
+                        v31.201l0.037,0.183v7.371c0,1.705,1.397,3.117,3.118,3.117c1.723,0,3.118-1.412,3.118-3.117V41.382l-0.037-0.378V22.704
+                        c0-3.767,2.908-6.859,6.473-6.859c3.416,0,6.159,2.85,6.384,6.402v51.429l0.088,0.417v5.018c0,1.705,1.397,3.117,3.118,3.117
+                        s3.118-1.412,3.118-3.117V22.698l-0.088-0.886v-8.756c0-3.766,2.898-6.856,6.466-6.856c3.565,0,6.473,3.078,6.473,6.856v19.218
+                        v35.024v12.337c0,1.729,1.395,3.117,3.118,3.117c1.717,0,3.117-1.389,3.117-3.117V67.297V32.312c0-3.766,2.838-6.835,6.321-6.835
+                        c3.495,0,6.32,3.069,6.32,6.835v58.465c0,1.718,1.4,3.118,3.117,3.118c1.718,0,3.118-1.4,3.118-3.118v-2.204l0.134-0.694V69.587
+                        c0-3.775,2.898-6.853,6.467-6.853c3.556,0,6.473,3.065,6.473,6.853v17.366l0.055,0.293v20.362
+                        C121.106,130.527,102.735,146.554,76.4,146.554z"
+                          />
+                        </g>
+                      </g>
+                    </svg>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <a href="{% url 'index' %}">
+      <svg
+        id="arrow2"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        transform="rotate(180)"
+      >
+        <path
+          d="M18.5 12h-9.793l3.147-3.146a.5.5 0 0 0-.708-.708l-4.5 4.5a.5.5 0 0 0 0 .708l4.5 4.5a.5.5 0 0 0 .708-.708L8.707 13H18.5a.5.5 0 0 0 0-1z"
+          fill="#000"
+        />
+      </svg>
+    </a>
+
+    <!--custom javaScript start-->
+    <script>
+      $(document).ready(function () {
+      	$("#messageArea").on("submit", function (event) {
+      		const date = new Date();
+      		const hour = date.getHours();
+      		const minute = date.getMinutes();
+      		const str_time = hour + ":" + minute;
+      		var rawText = $("#text").val();
+
+      		var userHtml = '<div class="d-flex justify-content-end mb-4"><div class="msg_cotainer_send">' + rawText + '<span class="msg_time_send">' + str_time + '</span></div><div class="img_cont_msg"><img src="{% static 'img/uae.jpg' %}" class="rounded-circle user_img_msg"></div ></div > ';
+
+      		$("#text").val("");
+      		$("#messageFormeight").append(userHtml);
+
+      		$.ajax({
+      			data: {
+      				msg: rawText,
+      			},
+      			type: "POST",
+      			url: "/chat/",
+      		}).done(function (data) {
+      			var botHtml = '<div class="d-flex justify-content-start mb-4"><div class="img_cont_msg"><img src="{% static 'img/MOI.jpg' %}" class="rounded-circle user_img_msg"></div > <div class="msg_cotainer">' + data.response + '<span class="msg_time">' + str_time + '</span></div></div > ';
+      			$("#messageFormeight").append($.parseHTML(botHtml));
+
+      			if (data.redirect)
+      			{
+      				window.locate.href = data.url;
+      			}
+      		});
+      		event.preventDefault();
+      	});
+      });
+    </script>
+
+    <script>
+      function startSpeechRecognition() {
+        var speech = true;
+        window.SpeechRecognition =
+          window.SpeechRecognition || window.webkitSpeechRecognition;
+        const recognition = new SpeechRecognition();
+        recognition.interimResults = true;
+        const words = document.querySelector(".words");
+        const p = document.createElement("p");
+        words.appendChild(p);
+        recognition.addEventListener("result", (e) => {
+          const transcript = Array.from(e.results)
+            .map((result) => result[0])
+            .map((result) => result.transcript)
+            .join("");
+          document.getElementById("text").value = transcript;
+          console.log(transcript);
+        });
+        if (speech == true) {
+          if (recognition && recognition.state == "running") {
+            clearTimeout(timeout);
+            recognition.stop();
+            recognition.removeEventListener("end", recognition.start);
+            recognition.abort();
+          } else {
+            recognition.start();
+            recognition.addEventListener("end", recognition.start);
+            timeout = setTimeout(() => {
+              recognition.stop();
+              recognition.removeEventListener("end", recognition.start);
+              recognition.abort();
+            }, 5000);
+          }
+        }
+      }
+      document
+        .getElementById("recordButton")
+        .addEventListener("click", function () {
+          startSpeechRecognition();
+        });
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          document.getElementById("startCamera").addEventListener("click", function() {
+              document.getElementById("videoElement").src = "{% url 'video_feeds' %}";
+          });
+          setTimeout(function() {
+              document.getElementById("videoElement").src = "";
+              document.getElementById("text").value = "hello";
+          }, 10000);
+
+          
+          
+          
+      });
+      </script>
+    <script src="{% static 'js/auto_color_script.js' %}"></script>
+    <script>
+      (function (d) {
+        var s = d.createElement("script");
+        s.setAttribute("data-account", "gchJ1Qb2TE");
+        s.setAttribute("src", "https://cdn.userway.org/widget.js");
+        (d.body || d.head).appendChild(s);
+      })(document);
+    </script>
+    <noscript
+      >Please ensure Javascript is enabled for purposes of
+      <a href="https://userway.org">website accessibility</a></noscript
+    >
+    <!--custom javaScript end-->
+  </body>
+  <!--End to page content-->
+</html>

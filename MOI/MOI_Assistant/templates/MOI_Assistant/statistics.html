@@ -1,0 +1,966 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Statistics</title>
+
+	<link rel="stylesheet" href="{% static 'css/chartist.min.css' %}">
+	<link href="{% static 'css/bootstrap-select.min.css' %}" rel="stylesheet">
+	<link href="{% static 'css/style_dashboard.css' %}" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+	<!--*******************
+        Preloader start
+    ********************-->
+	<div id="preloader">
+		<div class="sk-three-bounce">
+			<div class="sk-child sk-bounce1"></div>
+			<div class="sk-child sk-bounce2"></div>
+			<div class="sk-child sk-bounce3"></div>
+		</div>
+	</div>
+	<!--*******************
+        Preloader end
+    ********************-->
+	<style>
+		#mar {
+			margin-left: 40px;
+			margin-right: 25px;
+		}
+
+		#cent {
+			text-align: center;
+			align-items: center;
+			margin-left: 36%;
+		}
+
+		.line-graph-container {
+			width: 80%;
+			height: 100%;
+			margin: auto;
+		}
+
+		#sizer {
+			margin: 0;
+			padding: 8px;
+			text-align: left;
+		}
+
+		#aj {
+			background-color: #28a745;
+		}
+
+		#lineChart3 {
+			margin-left: 0;
+			margin-right: 0;
+			margin-bottom: 0;
+		}
+	</style>
+	<!--**********************************
+        Main wrapper start
+    ***********************************-->
+	<div id="main-wrapper">
+
+		<!--**********************************
+            Nav header start
+        ***********************************-->
+		<div class="nav-header">
+			<a href="{% url 'index' %}" class="brand-logo">
+				<i class="logo-abbr fa-brands fa-stumbleupon"></i>
+			</a>
+
+			<div class="nav-control">
+				<div class="hamburger">
+					<span class="line"></span><span class="line"></span><span class="line"></span>
+				</div>
+			</div>
+		</div>
+		<!--**********************************
+            Nav header end
+        ***********************************-->
+
+		<style>
+			/* Remove border color from the input field */
+			.form-control.border-0:focus {
+				box-shadow: none;
+			}
+
+			/* Set hover color to btn-success */
+			.btn.btn-outline-success:hover {
+				color: #fff;
+				background-color: #28a745;
+				border-color: #28a745;
+			}
+
+			/* Set background color to btn-success */
+			.btn.btn-outline-success {
+				background-color: #28a745;
+				border-color: #28a745;
+				color: #fff;
+			}
+		</style>
+
+		<!--**********************************
+            Header start
+        ***********************************-->
+		<div class="header">
+			<div class="header-content">
+				<nav class="navbar navbar-expand">
+					<div class="collapse navbar-collapse justify-content-between">
+						<div>
+							<div class="dashboard_bar">
+								Statistics
+							</div>
+						</div>
+						<ul class="navbar-nav header-right">
+							<li class="nav-item">
+								<div class="input-group search-area d-lg-inline-flex d-none">
+									<div class="input-group-append">
+										<form class="d-flex">
+											<input class="form-control me-2 border-0" type="search"
+												placeholder="Search here..." aria-label="Search" name="searched">
+											<button class="btn btn-outline-success round" type="submit">Search</button>
+										</form>
+									</div>
+								</div>
+							</li>
+							</li>
+							<li class="nav-item dropdown header-profile">
+								<a class="nav-link" href="javascript:void(0);" role="button" data-bs-toggle="dropdown">
+
+
+
+									<img src="{% static 'img/MOI.jpg' %}" width="20" alt="" />
+
+									<div class="header-info">
+
+									</div>
+								</a>
+
+
+
+
+								</span>
+								</a>
+					</div>
+					</li>
+					</ul>
+			</div>
+			</nav>
+		</div>
+	</div>
+	<!--**********************************
+            Header end ti-comment-alt
+        ***********************************-->
+
+	<!--**********************************
+            Sidebar start
+        ***********************************-->
+	<div class="deznav">
+		<div class="deznav-scroll">
+			{% if not_profile_user %}
+			<p style="text-align:center;"><a href="{%url 'index' %}" style="color:red;"> Please Update your profile
+				</a> </p>
+			{% endif %}
+			<ul class="metismenu" id="menu">
+				<li><a href="{% url 'index' %}">
+						<i class="flaticon-bar-chart-1"></i>
+						<span class="nav-text">HOME</span>
+					</a>
+				</li>
+				<li><a href="{% url 'MOI_Assistant' %}">
+						<i class="flaticon-bar-chart-1"></i>
+						<span class="nav-text">MOI ASSISTANT</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<!--**********************************
+            Sidebar end
+        ***********************************-->
+	<!--**********************************
+            Content body start
+        ***********************************-->
+	<div id="content" class="content-body">
+		<div class="container-fluid">
+			<!-- Add Project -->
+			<div class="modal fade" id="addProjectSidebar" onclick="toggleSidebar()">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="cent">Update Profile</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+						</div>
+						<div class="modal-body">
+							<form action="" method="POST" class="shadow p-5">
+								<small class="text-danger"></small>
+								<br>
+								<br>
+								<div class="col-12 mt-3">
+									<button type="submit" class="btn btn-primary" id="mar">Update</button>
+									<a href="{% url 'index' %}" class="btn btn-secondary">Cancel</a>
+								</div>
+
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row"><!-- row 1 -->
+				<div class="col-xl-3 col-xxl-3 col-lg-6 col-sm-6">
+					<div class="card card-bd">
+						<div class="bg-secondary card-border" style="background:#3444d5 !important;"></div>
+						<div class="card-body box-style">
+							<div class="media align-items-center">
+								<div class="media-body me-3">
+									<h4 id="visitorCount"><span id="count" class="font-w500 fs-20">0</span></h4>
+									<span>Page Visits</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xl-3 col-xxl-3 col-lg-6 col-sm-6">
+					<div class="card card-bd">
+						<div class="bg-warning card-border"></div>
+						<div class="card-body box-style">
+							<div class="media align-items-center">
+								<div class="media-body me-3">
+									<h4 id="active_count" class="font-w500 fs-20">0</h4>
+									<span class="fs-14">Page Engagement</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xl-3 col-xxl-3 col-lg-6 col-sm-6">
+					<div class="card card-bd">
+						<div class="bg-primary card-border"></div>
+						<div class="card-body box-style">
+							<div class="media align-items-center">
+								<div class="media-body me-3">
+									<h5 id="timer_spent" class="font-w500 fs-20">0s</h5>
+									<span>Time spent on page</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xl-3 col-xxl-3 col-lg-6 col-sm-6">
+					<div class="card card-bd">
+						<div class="bg-info card-border"></div>
+						<div class="card-body box-style">
+							<div class="media align-items-center">
+								<div class="media-body me-3">
+									<h2 id="loadingCount" class="font-w500 fs-20">0m 0s</h2>
+									<span class="fs-14">Page Load Duration</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xl-3 col-xxl-3 col-lg-6 col-sm-6">
+					<div class="card card-bd">
+						<div class="bg-secondary card-border" style="background:#3444d5 !important;"></div>
+						<div class="card-body box-style">
+							<div class="media align-items-center">
+								<div class="media-body me-3">
+									<h4><span id="success-ment" class="font-w500 fs-20">0</span></h4>
+									<span>successful page engagement</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xl-3 col-xxl-3 col-lg-6 col-sm-6">
+					<div class="card card-bd">
+						<div class="bg-danger card-border"></div>
+						<div class="card-body box-style">
+							<div class="media align-items-center">
+								<div class="media-body me-3">
+									<h4 id="dropped-eng" class="font-w500 fs-20">0</h4>
+									<span class="fs-14">Dropped Engagement</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xl-3 col-xxl-3 col-lg-6 col-sm-6">
+					<div class="card card-bd">
+						<div class="bg-primary card-border"></div>
+						<div class="card-body box-style">
+							<div class="media align-items-center">
+								<div class="media-body me-3">
+									<h5 id="access-users" class="font-w500 fs-20">0</h5>
+									<span>Accessibility Users</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xl-3 col-xxl-3 col-lg-6 col-sm-6">
+					<div class="card card-bd">
+						<div class="bg-success card-border"></div>
+						<div class="card-body box-style">
+							<div class="media align-items-center">
+								<div class="media-body me-3">
+									<h2 id="no-disabled" class="font-w500 fs-20">0</h2>
+									<span class="fs-14">Number of Disabled persons</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- end of row 1-->
+			<div class="row">
+				<div class="col-xl-6 col-xxl-12">
+					<div class="card">
+						<div class="card-header d-block border-0 pb-0">
+							<div class="d-flex justify-content-between pb-3">
+
+								<div class="dropdown">
+									<a href="javascript:void(0)" data-bs-toggle="dropdown" aria-expanded="false">
+										<svg width="16" height="22" viewBox="0 0 24 24" fill="none">
+											<path
+												d="M12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13Z"
+												stroke="#575757" stroke-width="2" stroke-linecap="round"
+												stroke-linejoin="round"></path>
+											<path
+												d="M12 6C12.5523 6 13 5.55228 13 5C13 4.44772 12.5523 4 12 4C11.4477 4 11 4.44772 11 5C11 5.55228 11.4477 6 12 6Z"
+												stroke="#575757" stroke-width="2" stroke-linecap="round"
+												stroke-linejoin="round"></path>
+											<path
+												d="M12 20C12.5523 20 13 19.5523 13 19C13 18.4477 12.5523 18 12 18C11.4477 18 11 18.4477 11 19C11 19.5523 11.4477 20 12 20Z"
+												stroke="#575757" stroke-width="2" stroke-linecap="round"
+												stroke-linejoin="round"></path>
+										</svg>
+									</a>
+								</div>
+							</div>
+							<div class="d-flex align-items-center">
+								<canvas id="barGraph" height="100"></canvas>
+							</div>
+						</div>
+						<div class="card-body pb-0 px-2 pt-2">
+							<div id="chartTimeline" class="timeline-chart"></div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xl-3 col-xl-6 col-sm-6">
+					<div class="card">
+						<br>
+						<h4 class="fs-20 mb-0 text-black text-center">Monthly Analysis</h4>
+						<canvas id="pieChart" margin="0" height="300"></canvas>
+					</div>
+				</div>
+				<div class="col-xl-3 col-xl-6 col-sm-6">
+					<div class="card">
+						<br>
+						<h4 class="fs-20 mb-0 text-black text-center">Yearly Analysis</h4>
+						<br><br><br><br><br>
+						<canvas id="line-chart"></canvas>
+						<div class="card-body text-center pb-0 px-2 pt-2">
+							<div id="widgetChart1" class="widgetChart1 dashboard-chart"></div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xl-6 col-xxl-12">
+						<div class="row">
+							<div class="col-xl-12">
+								<div class="card overflow-hidden">
+									<div class="card-body">
+										<div class="row">
+											<h4 class="fs-20 text-center">Data Analysis</h4>
+										</div>
+										<canvas id="lineChart3" width="800" height="420" margin="0"></canvas>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--**********************************
+            Footer start
+        ***********************************-->
+						<div class="footer">
+							<div class="copyright text-center">
+								<p>Copyright &copy;<b>
+										<script>document.write(new Date().getFullYear());</script>
+									</b>All rights reserved.</p>
+							</div>
+						</div>
+						<!--**********************************
+            Footer end
+        ***********************************-->
+						<script>
+							var startTime = performance.now();
+
+							window.addEventListener('DOMContentLoaded', function () {
+								var resources = [
+									// List of correct paths to resources
+									'static\css\style.css',
+									'static\js\bootstrap.min.js',
+									'templates\MOI_Assistant\index.html',
+									'static\img\MOI.jpg'
+								];
+
+								var loadingCount = 0;
+
+								function updateLoadingCount() {
+									loadingCount++;
+									var loadingCountElement = document.getElementById('loadingCount');
+									var minutes = Math.floor(loadingCount / 60);
+									var seconds = loadingCount % 60;
+									loadingCountElement.textContent = `${minutes}m ${seconds}s`;
+								}
+
+								resources.forEach(function (resource) {
+									var element;
+									if (resource.endsWith('.css')) {
+										element = document.createElement('link');
+										element.rel = 'stylesheet';
+										element.href = resource;
+									} else if (resource.endsWith('.js')) {
+										element = document.createElement('script');
+										element.src = resource;
+									} else if (resource.match(/\.(html|htm)$/) != null) {
+										element = document.createElement('iframe');
+										element.src = resource;
+									} else if (resource.match(/\.(jpeg|jpg|gif|png)$/) != null) {
+										element = new Image();
+										element.src = resource;
+									}
+
+									if (element) {
+										element.addEventListener('load', function () {
+											updateLoadingCount();
+											checkAllResourcesLoaded();
+										});
+										element.onerror = function () {
+											console.error('Failed to load resource:', resource);
+											checkAllResourcesLoaded();
+										};
+										document.body.appendChild(element);
+									}
+								});
+
+								function checkAllResourcesLoaded() {
+									if (loadingCount === resources.length) {
+										var endTime = performance.now();
+										var loadingTime = (endTime - startTime) / 1000; // Convert to seconds
+										var loadingTimeElement = document.getElementById('loadingTime');
+										loadingTimeElement.textContent = `Page loaded in ${loadingTime.toFixed(2)} seconds`;
+									}
+								}
+							});
+						</script>
+
+						<script>
+							// Function to track page visitors
+							function trackVisitors() {
+								// Check if localStorage is supported
+								if (typeof (Storage) !== "undefined") {
+									// Check if the visitor count is already stored in localStorage
+									if (localStorage.getItem("visitorCount")) {
+										// If yes, retrieve the count and increment it by 1
+										var count = parseInt(localStorage.getItem("visitorCount"));
+										count++;
+										// Update the count in localStorage
+										localStorage.setItem("visitorCount", count);
+									} else {
+										// If not, initialize the count to 1 and store it in localStorage
+										localStorage.setItem("visitorCount", 1);
+									}
+									// Update the count displayed on the page
+									document.getElementById("count").innerText = localStorage.getItem("visitorCount");
+								} else {
+									// If localStorage is not supported, display a message to the user
+									document.getElementById("visitorCount").innerText = "Visitor count cannot be tracked because your browser doesn't support localStorage.";
+								}
+							}
+
+							// Call the function to track visitors when the page loads
+							trackVisitors();
+						</script>
+						<script>
+							// Function to track activity on the page
+							function trackActivity() {
+								// Counter for activity
+								var activityCount = 0;
+
+								// Function to update activity count
+								function updateActivityCount() {
+									activityCount++;
+									var activeCountElement = document.getElementById('active_count');
+									activeCountElement.textContent = `${activityCount}`;
+								}
+
+								// Event listener for mouse hover events
+								document.addEventListener('mouseover', function () {
+									updateActivityCount();
+								});
+
+								// Event listener for clicks
+								document.addEventListener('click', function () {
+									updateActivityCount();
+								});
+
+								// Event listener for key presses
+								document.addEventListener('keydown', function () {
+									updateActivityCount();
+								});
+
+								// Event listener for scrolling
+								window.addEventListener('scroll', function () {
+									updateActivityCount();
+								});
+
+								// Event listener for focus events
+								document.addEventListener('focus', function () {
+									updateActivityCount();
+								}, true); // Capture phase to ensure early detection
+
+								// Event listener for blur events
+								document.addEventListener('blur', function () {
+									updateActivityCount();
+								}, true); // Capture phase to ensure early detection
+							}
+
+							// Call the trackActivity function when the DOM content is loaded
+							document.addEventListener('DOMContentLoaded', function () {
+								trackActivity();
+							});
+						</script>
+
+						<script>
+							// Function to calculate time spent on the page
+							function calculateTimeSpent(pagePath) {
+								var startTime = new Date().getTime(); // Get start time when the user enters the page
+
+								// Update the time spent on the page every second
+								setInterval(function () {
+									var currentTime = new Date().getTime();
+									var timeSpentInSeconds = (currentTime - startTime) / 1000; // Convert milliseconds to seconds
+									var minutes = Math.floor(timeSpentInSeconds / 60); // Calculate minutes
+									var seconds = Math.floor(timeSpentInSeconds % 60); // Calculate remaining seconds
+
+									// Update timer element with formatted time
+									var timerElement = document.getElementById('timer_spent');
+									timerElement.textContent = `${minutes}m ${seconds}s`;
+								}, 1000);
+							}
+
+							// Call the calculateTimeSpent function when the DOM content is loaded
+							document.addEventListener('DOMContentLoaded', function () {
+								// Pass the page path to calculateTimeSpent function
+								calculateTimeSpent('MOI/MOI_Assistant/templates/MOI_Assistant/index.html');
+							});
+						</script>
+
+						<script>
+							// Webpage metrics
+							const WebpageMetrics = ['Page Load Duration', 'Time spent on page', 'Page Visitors', 'Page Engagement'];
+
+							// Data for the bar graph (example data)
+							const data = {
+								labels: WebpageMetrics,
+								datasets: [{
+									label: 'Webpage Analysis',
+									data: [10, 15, 20, 18], // Example data representing values for each metric
+									backgroundColor: ['rgb(65, 12, 255)', 'rgb(54, 162, 235)', 'rgb(255, 205, 86)', 'rgb(192, 64, 192)'],
+									borderWidth: 1, // Border width of bars
+									barThickness: 40 // Width of bars
+								}]
+							};
+
+							// Configuration options for the bar graph
+							const options = {
+								responsive: true, // Make the chart responsive
+								scales: {
+									y: {
+										beginAtZero: true // Start the y-axis at 0
+									}
+								}
+							};
+
+							// Get the canvas element
+							const canvas = document.getElementById('barGraph');
+
+							// Create the bar graph
+							const barGraph = new Chart(canvas, {
+								type: 'bar',
+								data: data,
+								options: options
+							});
+						</script>
+
+						<script>
+							// Data for the pie chart (example data)
+							const data1 = {
+								labels: ['Page Engagements', 'Time Spent of Page', 'Savings', 'Page Visitors'],
+								datasets: [{
+									label: 'Monthly Analysis',
+									data: [50, 100, 80, 45], // Example data representing values for each category
+									backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4FAB00'] // Colors for each segment
+								}]
+							};
+
+							// Configuration options for the pie chart
+							const options1 = {
+								responsive: true, // Make the chart responsive
+								radius: '60%'
+							};
+
+							// Get the canvas element
+							const canvas1 = document.getElementById('pieChart');
+
+							// Create the pie chart
+							const pieChart = new Chart(canvas1, {
+								type: 'pie',
+								data: data1,
+								options: options1
+							});
+						</script>
+
+						<script>
+							// Sample data for each month
+							const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+							const percentageData = [10, 15, 20, 12, 30, 35, 10, 45, 50, 15, 30, 45, 55, 65, 75];
+
+							// Create line chart
+							var ctx = document.getElementById('line-chart').getContext('2d');
+							var chart = new Chart(ctx, {
+								type: 'line',
+								data: {
+									labels: months,
+									datasets: [{
+										label: 'Yearly Analysis',
+										data: percentageData,
+										borderColor: 'blue',
+										backgroundColor: 'transparent',
+										pointBackgroundColor: 'blue',
+										pointRadius: 4,
+										pointHoverRadius: 10,
+										borderWidth: 2
+									}]
+								},
+								options: {
+									scales: {
+										y: {
+											beginAtZero: true
+										}
+									}
+								}
+							});
+						</script>
+
+						<script>
+							// Data for the line graph
+							const dat = {
+								labels: ['Language and Communication Preferences', 'Conversation Channel Analysis', 'Session Recordings', 'Collected Information', 'Mode of Content Consumption', 'Error Rates'],
+								datasets: [{
+									label: 'Analysis',
+									data: [4, 12, 27, 75, 64, 60], // Example data representing values for each data point
+									borderColor: 'blue', // Color for the line
+									borderWidth: 2, // Width of the line
+									fill: false // Do not fill the area under the line
+								}]
+							};
+
+							// Configuration options for the line graph
+							const option = {
+								responsive: true, // Make the chart responsive
+								maintainAspectRatio: false, // Allow the chart to not maintain aspect ratio
+								layout: {
+									padding: {
+										left: 20,
+										right: 20,
+										top: 20,
+										bottom: 20,
+										margin: 0
+									}
+								},
+
+								scales: {
+									y: {
+										beginAtZero: true
+									}
+								},
+								plugins: {
+									legend: {
+										display: true,
+										position: 'bottom'
+									},
+									tooltip: {
+										enabled: true,
+										mode: 'index',
+										intersect: false
+									}
+								}
+							};
+
+							// Get the canvas element
+							const canva = document.getElementById('lineChart3');
+
+							// Create the line graph
+							const lineChart = new Chart(canva, {
+								type: 'line',
+								data: dat,
+								options: options
+							});
+						</script>
+
+						<script>
+							function checkPageEngagement() {
+								var countElement = document.getElementById('success-eng'); // Get the element containing the count
+								var count = parseInt(countElement.innerText); // Get the current count
+
+								// Event listeners for tracking activities
+								document.addEventListener('mouseover', incrementCount); // Track hover
+								document.addEventListener('click', incrementCount); // Track click
+								document.addEventListener('scroll', incrementCount); // Track scroll
+								// Assuming button clicks are tracked separately, add event listeners for buttons as well
+
+								function incrementCount() {
+									count++; // Increment count for each activity
+									countElement.innerText = count; // Update the count in the UI
+
+									// Check if the count has reached 200
+									if (count >= 200) {
+										return 200; // Return 200 if the count is 200 or more
+									}
+								}
+
+								// Set up a timer to stop after 10 seconds
+								setTimeout(function () {
+									// If the count hasn't reached 200, return 0 and remove event listeners to stop tracking
+									if (count < 200) {
+										// Remove event listeners to stop tracking
+										document.removeEventListener('mouseover', incrementCount);
+										document.removeEventListener('click', incrementCount);
+										document.removeEventListener('scroll', incrementCount);
+										// Assuming you also have event listeners for button clicks, remove them here
+
+										return 0; // Return 0 if the count hasn't reached 200
+									}
+								}, 10000); // 10 seconds
+
+								return count; // Return the current count
+							}
+
+						</script>
+
+						<script>
+							function checkEngagement() {
+								let engagement = parseInt(document.getElementById('success-ment').innerText);
+							}
+
+							// Simulating page engagement increase every second
+							let intervalId = setInterval(function () {
+								let engagement = parseInt(document.getElementById('success-ment').innerText);
+								engagement += Math.floor(Math.random() * 10) + 1; // Increment engagement by a random number between 1 and 10
+								if (engagement >= 100) {
+									clearInterval(intervalId); // Clear the interval
+									engagement = 1;
+									document.getElementById('success-ment').innerText = engagement;
+								} else {
+									engagement = 1;
+									document.getElementById('success-ment').innerText = engagement;
+								}
+
+								console.log("Engagement increased to " + engagement);
+								if (checkEngagement()) {
+									console.log("Success! Engagement reached 100 or more.");
+								} else {
+									console.log("Engagement still below 100.");
+								}
+							}, 1000);
+						</script>
+
+						<script>
+							let engagementTime = 0; // Variable to track engagement time
+
+							function checkEngagement() {
+								return engagementTime >= 60 ? 1 : 0; // Return 1 if engagement time is over 60 seconds, otherwise return 0
+							}
+
+							function startEngagementTimer() {
+								setInterval(function () {
+									engagementTime++; // Increment engagement time every second
+									console.log("Engagement time: " + engagementTime + " seconds");
+
+									if (checkEngagement()) {
+										clearInterval(intervalId); // Clear the interval
+										console.log("Success! Engagement reached 60 seconds or more.");
+										document.getElementById('dropped-eng').innerText = 1;
+									}
+								}, 1000);
+							}
+
+							function trackEngagement() {
+								startEngagementTimer(); // Start tracking engagement time
+
+								// Track user interactions
+								document.addEventListener('click', handleInteraction);
+								document.addEventListener('mouseover', handleInteraction);
+								document.addEventListener('mouseenter', handleInteraction);
+								document.addEventListener('scroll', handleInteraction);
+							}
+
+							function handleInteraction() {
+								engagementTime = 0; // Reset engagement time when user interacts with the page
+							}
+
+							// Start tracking engagement
+							trackEngagement();
+						</script>
+
+
+						<script>
+							// Function to check if engagement time is over 60 seconds
+							function checkEngagement() {
+								let engagementTime = 0;
+								return engagementTime >= 60 ? 1 : 0; // Return 1 if engagement time is over 60 seconds, otherwise return 0
+							}
+
+							// Function to start tracking engagement time
+							function startEngagementTimer() {
+								setInterval(function () {
+									engagementTime++; // Increment engagement time every second
+									console.log("Engagement time: " + engagementTime + " seconds");
+
+									if (checkEngagement()) {
+										clearInterval(intervalId); // Clear the interval
+										console.log("Success! Engagement reached 60 seconds or more.");
+										document.getElementById('no-disabled').innerText = 1; // Update the HTML element
+									}
+								}, 1000);
+							}
+
+							// Function to handle user interactions and reset engagement time
+							function handleInteraction() {
+								engagementTime = 0; // Reset engagement time when user interacts with the page
+							}
+
+							// Start tracking engagement
+							function trackEngagement() {
+								startEngagementTimer(); // Start tracking engagement time
+
+								// Track user interactions
+								document.addEventListener('click', handleInteraction);
+								document.addEventListener('mouseover', handleInteraction);
+								document.addEventListener('mouseenter', handleInteraction);
+								document.addEventListener('scroll', handleInteraction);
+							}
+
+							// Call the function to start tracking engagement
+							trackEngagement();
+
+							// Function to increment the click count and update the HTML element
+							function updateClickCount() {
+								let clickCount = 0;
+								clickCount++; // Increment the click count
+								document.getElementById('no-disabled').innerText = clickCount; // Update the HTML element
+							}
+
+							// Function to load the accessibility widget and increment click count
+							function loadAccessibilityWidget() {
+								// Increment the click count when the function is called
+								updateClickCount();
+
+								// Load the accessibility widget script
+								(function (d) {
+									var s = d.createElement("script");
+									s.setAttribute("data-account", "gchJ1Qb2TE");
+									s.setAttribute("src", "https://cdn.userway.org/widget.js");
+									(d.body || d.head).appendChild(s);
+								})(document);
+							}
+
+							// Function to check all functions and return 1 if any function returns 1; otherwise, return 0
+							function checkFunctions() {
+								// Define an array of functions to call
+								const functionsToCall = [
+									checkEngagement,
+									updateClickCount
+								];
+
+								// Loop through the array of functions
+								for (let i = 0; i < functionsToCall.length; i++) {
+									// Call the function and check its return value
+									const returnValue = functionsToCall[i]();
+
+									// If the return value is 1, return 1 immediately
+									if (returnValue === 1) {
+										return 1;
+									}
+								}
+
+								// If none of the functions returned 1, return 0
+								return 0;
+							}
+
+							// Call the function to check all functions and update the HTML element
+							const numberOfDisabled = checkFunctions();
+							document.getElementById('no-disabled').innerText = numberOfDisabled;
+						</script>
+						<script src="{% static 'js/global.min.js' %}"></script>
+						<script src="{% static 'js/bootstrap-select.min.js' %}"></script>
+						<script src="{% static 'js/Chart.bundle.min.js' %}"></script>
+
+						<!-- Chart piety plugin files -->
+						<script src="{% static 'dashboard_static/peity/jquery.peity.min.js' %}"></script>
+						<!-- Apex Chart -->
+						<script src="{% static 'js/apexchart.js' %}"></script>
+						<script src="{% static 'js/graph.js' %}"></script>
+						<!-- Dashboard 1 -->
+						<script src="{% static 'js/dashboard-1.js' %}"></script>
+
+						<script src="{% static 'js/custom.min.js' %}"></script>
+						<script src="{% static 'js/deznav-init.js' %}"></script>
+						<script src="{% static 'js/demo.js' %}"></script>
+						<script src="{% static 'js/styleSwitcher.js' %}"></script>
+						<script>
+							let clickCount = 0; // Variable to track how many times the function has been clicked and called
+
+							// Function to increment the click count and update the HTML element
+							function updateClickCount() {
+								clickCount++; // Increment the click count
+								document.getElementById('access-users').innerText = clickCount; // Update the HTML element
+							}
+
+							// Function to load the accessibility widget and increment click count
+							function loadAccessibilityWidget() {
+								// Increment the click count when the function is called
+								updateClickCount();
+
+								// Load the accessibility widget script
+								(function (d) {
+									var s = d.createElement("script");
+									s.setAttribute("data-account", "gchJ1Qb2TE");
+									s.setAttribute("src", "https://cdn.userway.org/widget.js");
+									(d.body || d.head).appendChild(s);
+								})(document);
+							}
+						</script>
+
+						<!-- Call the function to load the accessibility widget -->
+						<script>
+							loadAccessibilityWidget();
+						</script>
+
+						<noscript>
+							<!-- Display a message if JavaScript is disabled -->
+							Please ensure Javascript is enabled for purposes of <a href="https://userway.org">website
+								accessibility</a>.
+						</noscript>
+</body>
+
+</html>
