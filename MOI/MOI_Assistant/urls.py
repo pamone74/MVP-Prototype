@@ -9,5 +9,4 @@ urlpatterns = [
     path('statistics/', views.statistics, name='statistics'),
     path('payment/', views.payment, name='payments'),
     path('gamified/', views.gamified, name='Gamified'),
-    path('stream/', views.video_feed, name='video_feeds'),
 ]

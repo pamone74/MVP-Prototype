@@ -127,9 +127,6 @@
               </div>
             </div>
             <div id="messageFormeight" class="card-body msg_card_body"></div>
-            
-            <!-- sign language streaming -->
-            <img id="videoElement" >
 
             <div id="resize">
               <form id="messageArea" class="input-group">
@@ -315,22 +312,7 @@
         .addEventListener("click", function () {
           startSpeechRecognition();
         });
-    </script>
-    <script>
-      document.addEventListener("DOMContentLoaded", function() {
-          document.getElementById("startCamera").addEventListener("click", function() {
-              document.getElementById("videoElement").src = "{% url 'video_feeds' %}";
-          });
-          setTimeout(function() {
-              document.getElementById("videoElement").src = "";
-              document.getElementById("text").value = "hello";
-          }, 10000);
 
-          
-          
-          
-      });
-      </script>
     <script src="{% static 'js/auto_color_script.js' %}"></script>
     <script>
       (function (d) {
