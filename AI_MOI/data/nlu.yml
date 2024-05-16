@@ -1,0 +1,391 @@
+version: "3.1"
+
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
+    - gd mng
+
+- intent: goodbye
+  examples: |
+    - cu
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
+
+- intent: affirm
+  examples: |
+    - y
+    - indeed
+    - of course
+    - that sounds good
+    - correct
+    - i am
+
+- intent: deny
+  examples: |
+    - no
+    - n
+    - never
+    - I don't think so
+    - don't like that
+    - no way
+    - not really
+
+- intent: mood_great
+  examples: |
+    - perfect
+    - great
+    - amazing
+    - feeling like a king
+    - wonderful
+    - I am feeling very good
+    - I am great
+    - I am amazing
+    - I am going to save the world
+    - super stoked
+    - extremely good
+    - so so perfect
+    - so good
+    - okay
+    - ok
+    - so perfect
+    - ok good
+    - i am fine
+    - i am good
+
+
+- intent: mood_unhappy
+  examples: |
+    - my day was horrible
+    - I am sad
+    - I don't feel very well
+    - I am disappointed
+    - super sad
+    - I'm so sad
+    - sad
+    - very sad
+    - unhappy
+    - not good
+    - not very good
+    - extremly sad
+    - so saad
+    - so sad
+    - bad
+    - annoyed
+    - fair
+
+- intent: bot_challenge
+  examples: |
+    - are you a bot?
+    - are you a human?
+    - am I talking to a bot?
+    - am I talking to a human?
+    - who are you?
+    - what are you?
+    - are you a chatbot?
+
+- intent: ask_for_help
+  examples: |
+    - help
+    - I need help
+    - can you help me?
+    - I need a hand
+    - I need assistance
+    - support
+    - I need support
+    - I need help with something
+    - can you assist me?
+    - I need help with something
+
+- intent: check_fines
+  examples: |
+    - check  my fines
+    - traffic fines
+    - fines
+    - how much do I owe
+    - how much do I owe in fines
+    - how can i check my fines
+    - how can i check my traffic fines
+    - hello how can i check my fines
+    - do i have fines
+    - do i have any fines
+    - help me pay my fines
+    - how can i pay my fines
+
+- intent: renew_driving_license
+  examples: |
+    - renew my driving license
+    - renew my license
+    - renew my driving license please
+    - renew my license please
+    - how can i renew my driving license
+    - how can i renew my license
+    - how can i renew my driving license please
+    - how can i renew my license please
+    - hello how can i renew my driving license
+    - hello how can i renew my license
+    - driving license
+    - license
+    - renew my driving license
+    - renew my license
+    - car license
+    - driver license
+    - drivers
+  
+- intent: renew_vehicle_registration
+  examples: |
+    - renew my veichle registration
+    - renew my registration
+    - renew my veichle registration please
+    - renew my registration please
+    - how can i renew my veichle registration
+    - how can i renew my registration
+    - how can i renew my veichle registration pleas
+    - how can i renew my registration please
+    - hello how can i renew my veichle registration
+    - hello how can i renew my registration
+    - car registration
+    - registration
+    - renew my car registration
+
+- intent: viechle_ownership transfer
+  examples: |
+    - transfer my veichle ownership
+    - i want to tranfer my veichle ownership
+    - how can  i trandfer the ownership of my veichle
+    - is there anyway i can transfer my veichle ownership
+    - transfer viechle ownerhip
+    - viechle ownership transfer
+    - viechle ownership transfer process
+    - veichle ownership transfer fees
+    - viechle ownership transfer documents
+    - what do i need to transfwer the ownsership of my car
+    - car transfer
+    - car ownership transfer
+    - car ownership transfer process
+    - motor car transfer services
+    - can i transfer my car ownership
+    - how can i transfer my car ownership
+    - where can i transfer my car ownership
+    - how much does it cost to transfer my car ownership
+    - how long does it take to transfer my car ownership
+
+- intent: criminal_record_certificate
+  examples: |
+    - criminal record certificate
+    - criminal record
+    - criminal record certificate process
+    - criminal record certificate fees
+    - criminal record certificate documents
+    - how can i get a criminal record certificate
+    - where can i get a criminal record certificate
+    - how much does it cost to get a criminal record certificate
+    - how long does it take to get a criminal record certificate
+    - can i check my crimianl record
+    - can i get my criminal record certificate online
+    - how can i get my criminal record certificate online
+    - crimes record
+    - crimes record certificate
+    - police clearance certificate
+    - police clearance certificate process
+
+
+- intent: issuance_driving_license
+  examples: |
+    - issuance driving license
+    - issuance driving license process
+    - issuance driving license fees
+    - issuance driving license documents
+    - how can i get a driving license
+    - where can i get a driving license
+    - how much does it cost to get a driving license
+    - how long does it take to get a driving license
+    - can i get my driving license online
+    - how can i get my driving license online
+    - i need new driving license
+    - how can i apply for new driving license
+    - new driving licesne
+    - new driving license process
+    - new driving license fees
+    - i want to renew my driving license
+    - how can i renew my driving license
+    - renew driving license
+    - renew driving license process
+    - driving license renewal fees
+    - driving license renewal
+    - renewal of drivers license
+    - applying for driving license
+    - how can i apply for driving license
+
+- intent: appreciate
+  examples: |
+    - thanks
+    - thank you
+    - thank you so much
+    - thanks a lot
+    - thnx
+    - thank you very much
+    - i really appreciate
+    - i appreciate
+    - i appreciate your help
+    - i appreciate your support
+    - thanks very much
+    - thank you for your help
+    - i like you
+    - i love you
+   
+- intent: joke
+  examples: |
+    - tell me a joke
+    - tell me something funny
+    - make me laugh
+    - i need a joke
+    - can you tell me a joke
+    - joke
+    - jokes
+    - tell me a funny joke
+    - tell me a joke please
+    - tell me a joke
+    - tell me a joke
+    - story
+    - maybe sothing nice  
+   
+- intent: blank_quiz
+  examples: |
+    - why?
+    - What?
+    - How?
+    - When?
+    - Where?
+    - Who?
+    - Which?
+    - What is this?
+- intent: things_i_can_do
+  examples: |
+    - what can you do?
+    - what is your purpose?
+    - what are you capable of?
+    - what are you able to do?
+    - what are you able to do for me?
+    - can you do anything for me?
+    - what are you able to do for me?
+
+- intent: payment
+  examples: |
+    - yes pay
+    - pay
+    - pay now
+    - pay for me
+    - pay for me now
+    - yes
+  
+- intent: payment_inquiry
+  examples: |
+    - how can i pay
+    - make payment
+    - how can i make payment
+    - payment
+ 
+ 
+- intent: pay_fines
+  examples: |
+    - yes pay
+    - pay fines
+    - pay traffic fines
+    - pay my traffic fines
+    - pay my fines now
+    - pay my traffic fines now
+    - pay my fines please
+    - pay my traffic fines
+
+- intent: pay_driving_license
+  examples: |
+    - pay driving license
+    - pay my driving license
+    - pay my driving license now
+    - pay my driving license please
+    - pay my driving license fees
+    - pay my driving license fees now
+    - pay my driving license fees please
+    - pay my driving license fees now
+    - pay my driving license fees please
+    - pay my driving license fees
+    - renew driving license
+  
+  
+- intent: pay_vehicle_registration
+  examples: |
+    - pay vehicle registration
+    - pay my vehicle registration
+    - pay my vehicle registration now
+    - pay my vehicle registration please
+    - pay my vehicle registration fees
+    - pay my vehicle registration fees now
+    - pay my vehicle registration fees please
+    - pay my vehicle registration fees now
+    - pay my vehicle registration fees please
+    - pay my vehicle registration fees
+    - pay vehicle registration 
+    - renew vehicle registration
+
+- intent: payment_of_criminal_record_certificate
+  examples: |
+    - pay criminal record certificate
+    - pay my criminal record certificate
+    - pay my criminal record certificate now
+    - pay my criminal record certificate please
+    - pay my criminal record certificate fees
+    - pay my criminal record certificate fees now
+    - pay my criminal record certificate fees please
+    - pay my criminal record certificate fees now
+    - pay my criminal record certificate fees please
+    - pay my criminal record certificate fees
+    - pay criminal record certificate
+    - police clearance
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   

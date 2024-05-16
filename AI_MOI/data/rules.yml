@@ -1,0 +1,117 @@
+version: "3.1"
+
+rules:
+
+- rule: Say goodbye anytime the user says goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
+- rule: Say 'MOI Assistant' anytime the user challenges
+  steps:
+  - intent: bot_challenge
+  - action: utter_iamabot
+
+- rule: Check fines
+  steps:
+  - intent: check_fines
+  - action: utter_ask_fines
+  - action: action_handler
+
+- rule: Renew driving license
+  steps:
+  - intent: renew_driving_license
+  - action: utter_ask_driving_license
+  - action: action_handler
+
+- rule: Renew vehicle registration
+  steps:
+  - intent: renew_vehicle_registration
+  - action: utter_ask_vehicle_registration
+  - action: action_handler
+
+- rule: criminal record certificate
+  steps:
+  - intent: criminal_record_certificate
+  - action: utter_ask_criminal_record_certificate
+  - action: action_handler
+
+- rule: Ask for help
+  steps:
+  - intent: ask_for_help
+  - action: utter_ask_help
+
+
+- rule: Deny
+  steps:
+  - intent: deny
+  - action: utter_ask_help
+
+- rule: Greet
+  steps:
+  - intent: greet
+  - action: utter_greet
+
+- rule: unhappy
+  steps:
+  - intent: mood_unhappy
+  - action: utter_unhappy
+  - action: utter_please
+
+- rule: story
+  steps:
+  - intent: joke
+  - action: utter_some_jokes
+  - action: utter_joke
+
+- rule: appreciate
+  steps:
+  - intent: appreciate
+  - action: utter_appreciate
+
+- rule: Affirm
+  steps:
+  - intent: affirm
+  - action: utter_happy
+
+
+- rule: blank_quiz
+  steps:
+  - intent: blank_quiz
+  - action: utter_blank_quiz
+
+- rule: moods great
+  steps:
+  - intent: mood_great
+  - action: utter_happy
+
+- rule: things_i_can_do
+  steps:
+  - intent: things_i_can_do
+  - action: utter_things_i_can_do
+
+
+- rule: payment
+  steps:
+  - intent: payment
+  - action: utter_payment
+  
+- rule: payment_inquiry
+  steps:
+  - intent: payment_inquiry
+  - action: utter_payment_inquiry
+
+- rule: pay_fines
+  steps:
+  - intent: pay_fines
+  - action: utter_payment_of_fines
+
+- rule: pay_vehicle_registration
+  steps:
+  - intent: pay_vehicle_registration
+  - action: utter_payment_of_vehicle_registration
+
+- rule: pay_criminal_record_certificate
+  steps:
+  - intent: pay_criminal_record_certificate
+  - action: utter_payment_of_criminal_record_certificate

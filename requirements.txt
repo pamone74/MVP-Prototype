@@ -1,0 +1,8 @@
+django
+transformers
+torch
+pipenv
+rasa
+opencv-python==4.7.0.68
+mediapipe
+scikit-learn==1.2.0

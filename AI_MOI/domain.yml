@@ -1,0 +1,139 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - mood_great
+  - mood_unhappy
+  - bot_challenge
+  - check_fines
+  - renew_driving_license
+  - renew_vehicle_registration
+  - ask_for_help
+  - vehicle_ownership transfer
+  - criminal_record_certificate
+  - issuance_driving_license
+  - joke
+  - appreciate
+  - blank_quiz
+  - things_i_can_do
+  - payment
+  - payement_inquiry
+  - payment_of_fines
+  - payment_of_vehicle_registration
+  - payment_of_criminal_record_certificate
+responses:
+  utter_greet:
+  - text: "Hey! How are you?"
+  - text: "Hello! How can I help you today?"
+  - text: "Hi! How can I assist you today?"
+
+  utter_cheer_up:
+  - text: "Here is something to cheer you up:"
+    image: "https://i.imgur.com/dpSOzQw_lq.mp4"
+
+  utter_did_that_help:
+  - text: "Did that help you?"
+
+  utter_happy:
+  - text: "Impressive."
+  - text: "Marsha Allah."
+  - text: "that's cool'."
+  - text: "Wishing you a happy day."
+
+  utter_goodbye:
+  - text: "Good Bye!"
+  - text: "Bye."
+  - text: "See you soon."
+
+  utter_iamabot:
+  - text: "I am MOI Assistant, powered by Ministry of Interior, I can help you with MOI Services, just say what you need."
+    buttons:
+    - title: "Traffic Fines"
+      payload: "/check_fines"
+    - title: "Driving License"
+      payload: "/renew_driving_license"
+    - title: "Vehicle Registration"
+      payload: "/renew_vehicle_registration"
+    - title: "Criminal Record Certificate"
+      payload: "/criminal_record_certificate"
+    
+
+  utter_payment_of_criminal_record_certificate:
+  - text: "pay_criminal_record_certificate"
+
+  utter_unhappy:
+  - text: "I am sorry to hear that."
+
+  utter_please:
+  - text: "Please, how can i help you?"
+  - text: "can you tell me how can i help you?"
+
+  utter_some_jokes:
+  - text: "Here are some jokes for you to cheer you up:"
+
+  utter_joke:
+  - text: "Why did the scarecrow win an award? Because he was outstanding in his field!"
+  - text: "Why did the tomato turn red? Because it saw the salad dressing!"
+  - text: "Why did the math book look sad? Because it had too many problems."
+  - text: "Why was the computer cold? It left its Windows open!"
+  - text: "Why don't skeletons fight each other? Because they don't have the guts!"
+
+  utter_ask_help:
+  - text: "How can I assist you?"
+  - text: "What do you need help with?"
+
+  utter_ask_fines:
+  - text: "Sure, Let me check your fine. Just a moment."
+  - text: "I can help you with that. Let me check your fines."
+
+  utter_ask_driving_license:
+  - text: "Sure, Let me check your driving license. Just a moment."
+  - text: "I can help you with that. Let me check your driving license."
+
+  utter_ask_vehicle_registration:
+  - text: "Sure, I am happy to help you finish the process."
+
+  utter_appreciate:
+  - text: "I appreciate your patience."
+  - text: "You are Welcome."
+
+# Response for the things the bot can do
+  utter_things_i_can_do:
+  - text: "I can help you with MOI services Just tell me what you need help with."
+
+# Quiz that can not be understood by the bot
+  utter_blank_quiz:
+  - text: "I am sorry I did not get that,please be specifc and ask me again."
+  - text: "I am sorry can you repeat that again."
+  - text: "Ooops seems like I did not get that, please ask me again."
+
+# Form responses for Criminal Record Certificate
+  utter_ask_criminal_record_certificate:
+  - text: "Alright, Let me do that real quick"
+
+  utter_payment:
+  - text: "pay_now"
+
+  utter_payment_of_fines:
+  - text: "pay_fines"
+
+  utter_payment_of_vehicle_registration:
+  - text: "pay_vehicle_registration"
+
+  utter_payment_inquiry:
+  - text: "What do you want to pay?"
+  - text: "Can you be more specific about the payment you want to make?"
+  - text: "What payment do you want to make?"
+  utter_default:
+  - text: "I am sorry, I do not have an answer for that at the moment, I am trained only for these services [Traffic Fines, drivers license,  vehicle license renewal, Criminal records ]."
+ 
+actions:
+- action_handler
+- validate_criminal_record_certificate_form
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
